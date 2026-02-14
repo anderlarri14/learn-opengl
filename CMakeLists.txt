@@ -1,0 +1,55 @@
+cmake_minimum_required (VERSION 4.2.3)
+project (learn-opengl)
+
+# find_package(OpenGL REQUIRED)
+
+# Ask the user to give the paths to GLFW, GLEW and GLM.
+# On Linux this can be found automatically with pkg-config; 
+# see http://stackoverflow.com/questions/6889264/cmake-flags-for-opengl-using-glew-and-glfw, for instance.
+
+# set(OPENGL_INCLUDE_PATH ../libraries-cpp/OpenGL/includes)
+
+set(OPENGL_INCLUDES ../libraries-cpp/OpenGL/includes)
+
+set(GLFW_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/../libraries-cpp/OpenGL/lib/GLFW/glfw3.lib")
+# set(GLFW_LIBRARY ../libraries-cpp/OpenGL/lib/GLFW/glfw3)
+
+# set(GLEW_INCLUDE_PATH "" CACHE PATH "The directory that contains GL/glew.h" )
+# set(GLEW_LIBRARY "" CACHE FILEPATH "libglew.a or glew.lib" )
+
+# set(GLM_INCLUDE_PATH "" CACHE PATH "The directory that contains glm/glm.hpp" )
+
+
+set(MY_HEADER_FILES
+	# put all your .h here. Right now we have none.
+	# Example : 
+	# ../common/shader.hpp
+)
+
+set(MY_SOURCE_FILES
+    src/glad.c
+	src/main.cpp
+)
+
+
+
+# include_directories(
+# 	${OPENGL_INCLUDE_PATH}
+# )
+
+
+add_executable(learn-opengl
+	${MY_HEADER_FILES}
+	${MY_SOURCE_FILES}
+)
+
+target_include_directories(learn-opengl PRIVATE 
+    ${OPENGL_INCLUDES}
+)
+
+target_link_libraries(learn-opengl
+	"${GLFW_LIBRARY}"
+    opengl32
+	# ${GLFW_LIBRARY}
+	# ${GLEW_LIBRARY}
+)
