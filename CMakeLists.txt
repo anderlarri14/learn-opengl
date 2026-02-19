@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 4.2.3)
 project (learn-opengl)
 
 # find_package(OpenGL REQUIRED)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Ask the user to give the paths to GLFW, GLEW and GLM.
 # On Linux this can be found automatically with pkg-config; 
@@ -24,11 +26,13 @@ set(MY_HEADER_FILES
 	# put all your .h here. Right now we have none.
 	# Example : 
 	# ../common/shader.hpp
+	src/shader.h
 )
 
 set(MY_SOURCE_FILES
     src/glad.c
 	src/main.cpp
+	src/shader.cpp
 )
 
 
@@ -41,6 +45,14 @@ set(MY_SOURCE_FILES
 add_executable(learn-opengl
 	${MY_HEADER_FILES}
 	${MY_SOURCE_FILES}
+)
+
+add_custom_command(TARGET learn-opengl POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:learn-opengl>/shaders"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/shaders"
+        "$<TARGET_FILE_DIR:learn-opengl>/shaders"
+    COMMENT "Copiando shaders al directorio de salida..."
 )
 
 target_include_directories(learn-opengl PRIVATE 
