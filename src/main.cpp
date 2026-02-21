@@ -70,6 +70,7 @@ int main(int argc, char* argv[])
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     // glBindVertexArray(0);
 
+    float offset = 0.5f;
     while (!glfwWindowShouldClose(window))
     {
         // input
@@ -81,6 +82,7 @@ int main(int argc, char* argv[])
 
         // render the triangle
         ourShader.use();
+        ourShader.setFloat("xOffset", offset);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
