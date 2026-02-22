@@ -85,7 +85,6 @@ int main(int argc, char* argv[])
     }
     stbi_image_free(textureData);
 
-    // set up vertex data (and buffer(s)) and configure vertex attributes
     float vertices[] = {
         // positions          // colors           // texture coords
          0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
