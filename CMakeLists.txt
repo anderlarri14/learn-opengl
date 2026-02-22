@@ -55,6 +55,14 @@ add_custom_command(TARGET learn-opengl POST_BUILD
     COMMENT "Copiando shaders al directorio de salida..."
 )
 
+add_custom_command(TARGET learn-opengl POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:learn-opengl>/textures"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/textures"
+        "$<TARGET_FILE_DIR:learn-opengl>/textures"
+    COMMENT "Copiando texturas al directorio de salida..."
+)
+
 target_include_directories(learn-opengl PRIVATE 
     ${OPENGL_INCLUDES}
 )
