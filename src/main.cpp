@@ -151,10 +151,25 @@ int main(int argc, char* argv[])
         unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
         
-        ourShader.use();
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        // glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(-0.5f, 0.5f, 0.0f));
+        float scaleAmount = (float)sin(glfwGetTime());
+        trans = glm::scale(trans, glm::vec3(scaleAmount, scaleAmount, 1.0f));
+        
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &trans[0][0]);
+
+        // trans = glm::mat4(1.0f); // reset it to identity matrix
+        // trans = glm::translate(trans, glm::vec3(-0.5f, 0.5f, 0.0f));
+        // float scaleAmount = static_cast<float>(sin(glfwGetTime()));
+        // trans = glm::scale(trans, glm::vec3(scaleAmount, scaleAmount, scaleAmount));
+        // glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &trans[0][0]);
+
+        // ourShader.use();
+        // glBindVertexArray(VAO);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         glfwSwapBuffers(window);
