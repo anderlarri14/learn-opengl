@@ -27,12 +27,12 @@ set(MY_HEADER_FILES
 	# Example : 
 	# ../common/shader.hpp
 	src/shader.h
+	src/camera.h
 )
 
 set(MY_SOURCE_FILES
     src/glad.c
 	src/main.cpp
-	src/shader.cpp
 )
 
 
